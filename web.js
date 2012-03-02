@@ -32,5 +32,12 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+// Only listen on $ node web.js
+
+if (!module.parent) {
+  var port = process.env.PORT || 5000;
+  console.log("Listening on " + port);
+
+  app.listen(port);
+  console.log("Express server listening on port %d", app.address().port);
+}
