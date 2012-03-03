@@ -26,7 +26,10 @@ ARTHACK.GeoLocation = {
   sendMyLocation: function(newLocation){
     var socket = ARTHACK.WebSocket.socket;
     if(socket){
-      socket.send(newLocation);
+      socket.emit('clientMessage',newLocation); // socket.emit means 'send'      
+      socket.on('serverResponse', function(data){ //socket.on means 'listen'
+        console.log('the server resonded with:', data);
+      });
     }
     console.log('new location is ',newLocation);
   },

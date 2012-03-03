@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes');
 
 var app = module.exports = express.createServer();
+var io = require('socket.io').listen(app);
 
 // Configuration
 
@@ -41,3 +42,7 @@ if (!module.parent) {
   app.listen(port);
   console.log("Express server listening on port %d", app.address().port);
 }
+
+var WebSocket = require('./lib/websocket'); 
+new WebSocket(io);
+
